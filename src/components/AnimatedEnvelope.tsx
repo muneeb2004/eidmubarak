@@ -53,18 +53,22 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
     },
   }
 
-  // Seal button animation
   const sealVariants = {
     idle: {
       scale: 1,
-      rotate: 0,
+      x: '-50%',
+      y: '-50%',
     },
     hover: {
       scale: 1.05,
+      x: '-50%',
+      y: '-50%',
       transition: { duration: 0.3, ease: 'easeOut' as const },
     },
     tap: {
       scale: 0.95,
+      x: '-50%',
+      y: '-50%',
     },
   }
 
@@ -122,7 +126,7 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
         {!isOpen && (
           <motion.button
             aria-label="Open Envelope"
-            className="seal-btn absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-[80px] h-[80px] bg-surface rounded-full shadow-seal flex flex-col items-center justify-center text-primary border-2 border-primary/10"
+            className="seal-btn absolute top-1/2 left-1/2 z-30 w-[80px] h-[80px] bg-surface rounded-full shadow-seal flex flex-col items-center justify-center text-primary border-2 border-primary/10"
             variants={sealVariants}
             initial="idle"
             whileHover="hover"
