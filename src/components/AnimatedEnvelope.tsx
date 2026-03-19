@@ -36,44 +36,32 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
     },
   }
 
-  // Letter slide-up animation
+  // Letter slide-up extraction animation
   const letterVariants = {
     hidden: {
       y: 0,
-      opacity: 0.5,
+      opacity: 0,
     },
     visible: {
-      y: -80,
+      y: -160,
       opacity: 1,
       transition: {
-        duration: 0.5,
-        delay: 0.3,
-        ease: [0.4, 0, 0.2, 1] as const,
+        duration: 0.8,
+        delay: 0.35,
+        ease: [0.34, 1.56, 0.64, 1] as const, // Elegant spring bounce
       },
     },
   }
 
+  // Seal button animation
   const sealVariants = {
-    idle: {
-      scale: 1,
-      x: '-50%',
-      y: '-50%',
-    },
-    hover: {
-      scale: 1.05,
-      x: '-50%',
-      y: '-50%',
-      transition: { duration: 0.3, ease: 'easeOut' as const },
-    },
-    tap: {
-      scale: 0.95,
-      x: '-50%',
-      y: '-50%',
-    },
+    idle: { scale: 1, x: '-50%', y: '-50%' },
+    hover: { scale: 1.05, x: '-50%', y: '-50%', transition: { duration: 0.3, ease: 'easeOut' as const } },
+    tap: { scale: 0.95, x: '-50%', y: '-50%' },
   }
 
   return (
-    <div className="relative z-10 w-full max-w-[600px] flex items-center justify-center p-4">
+    <div className="relative z-10 w-full max-w-[600px] flex items-center justify-center p-4 min-h-[400px]">
       {/* Radial Aura Background */}
       <div className="absolute inset-0 aura-bg pointer-events-none"></div>
 
@@ -82,19 +70,27 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
         className="envelope-wrapper relative w-[90vw] max-w-[400px] h-[260px] cursor-pointer group"
         onClick={handleClick}
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' as const }}
+        animate={
+          isOpen
+            ? { opacity: 0, y: 60, scale: 0.9, transition: { delay: 0.9, duration: 0.4, ease: 'easeIn' } }
+            : { opacity: 1, y: 0, scale: 1 }
+        }
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         {/* Envelope Back */}
-        <div className="absolute inset-0 bg-[#E8D5E3] rounded-lg shadow-glow overflow-hidden">
-          {/* Inner Letter Peek */}
+        <div className="absolute inset-0 bg-[#E8D5E3] rounded-lg shadow-glow">
+          {/* Inner Letter Peek - Removed overflow-hidden from parent so it can slide OUT */}
           <motion.div
-            className="letter-peek absolute inset-x-4 top-4 bottom-0 bg-surface rounded-t-lg shadow-inner z-0 flex items-start justify-center pt-8"
+            className="letter-peek absolute inset-x-4 top-4 bottom-2 bg-surface rounded-t-lg shadow-seal z-0 flex flex-col items-center pt-8 px-6 gap-3 border border-slate-100"
             variants={letterVariants}
             initial="hidden"
             animate={isOpen ? 'visible' : 'hidden'}
           >
-            <div className="w-3/4 h-2 bg-muted/20 rounded-full mb-4"></div>
+            {/* Visual simulation of the letter contents */}
+            <div className="w-1/3 h-1.5 bg-primary/20 rounded-full mb-2"></div>
+            <div className="w-full h-1.5 bg-slate-100 rounded-full"></div>
+            <div className="w-5/6 h-1.5 bg-slate-100 rounded-full"></div>
+            <div className="w-4/6 h-1.5 bg-slate-100 rounded-full"></div>
           </motion.div>
         </div>
 
@@ -110,7 +106,7 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
 
         {/* Envelope Top Flap (Animated) */}
         <motion.div
-          className="flap absolute top-0 left-0 w-full h-full z-20 pointer-events-none"
+          className="flap absolute top-0 left-0 w-full h-full z-20 pointer-events-none drop-shadow-sm"
           variants={flapVariants}
           initial="closed"
           animate={isOpen ? 'open' : 'closed'}
