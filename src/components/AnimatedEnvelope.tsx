@@ -61,7 +61,6 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
     },
     hover: {
       scale: 1.05,
-      rotate: 15,
       transition: { duration: 0.3, ease: 'easeOut' as const },
     },
     tap: {
@@ -114,7 +113,7 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
           style={{ transformStyle: 'preserve-3d', transformOrigin: 'top center' }}
         >
           <div
-            className="absolute top-0 left-0 w-full h-[60%] bg-[#D496C4] rounded-t-lg"
+            className="absolute top-0 left-0 w-full h-[55%] bg-[#D496C4] rounded-t-lg"
             style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
           ></div>
         </motion.div>
@@ -123,7 +122,7 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
         {!isOpen && (
           <motion.button
             aria-label="Open Envelope"
-            className="seal-btn absolute top-[53%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-[80px] h-[80px] bg-surface rounded-full shadow-seal flex flex-col items-center justify-center text-primary border-2 border-primary/10"
+            className="seal-btn absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-[80px] h-[80px] bg-surface rounded-full shadow-seal flex flex-col items-center justify-center text-primary border-2 border-primary/10"
             variants={sealVariants}
             initial="idle"
             whileHover="hover"
