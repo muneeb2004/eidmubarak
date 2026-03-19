@@ -1,6 +1,8 @@
-import fs from 'fs/promises'
-import path from 'path'
+import { Redis } from '@upstash/redis'
 import { generateWishHash } from './hash'
+
+// Initialize Redis client
+const redis = Redis.fromEnv()
 
 export interface Wish {
   hash: string
@@ -10,28 +12,15 @@ export interface Wish {
   expiresAt?: string
 }
 
-const WISHES_DIR = path.join(process.cwd(), 'data', 'wishes')
+const WISH_PREFIX = 'wish:'
 
 /**
- * Ensure the wishes directory exists
- */
-async function ensureWishesDir(): Promise<void> {
-  try {
-    await fs.mkdir(WISHES_DIR, { recursive: true })
-  } catch (error) {
-    console.error('Failed to create wishes directory:', error)
-  }
-}
-
-/**
- * Generate a unique wish with hash and store it
+ * Generate a unique wish with hash and store it in Redis
  */
 export async function createWish(
   recipientName: string,
   message: string
 ): Promise<Wish> {
-  await ensureWishesDir()
-
   const hash = generateWishHash()
   const now = new Date()
 
@@ -44,53 +33,44 @@ export async function createWish(
     expiresAt: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString(),
   }
 
-  const filePath = path.join(WISHES_DIR, `${hash}.json`)
-
   try {
-    await fs.writeFile(filePath, JSON.stringify(wish, null, 2))
+    // Store in Redis with expiration (30 days = 2592000 seconds)
+    await redis.set(`${WISH_PREFIX}${hash}`, JSON.stringify(wish), {
+      ex: 30 * 24 * 60 * 60,
+    })
     return wish
   } catch (error) {
-    console.error('Failed to create wish:', error)
+    console.error('Failed to create wish in Redis:', error)
     throw new Error('Failed to create wish')
   }
 }
 
 /**
- * Retrieve a wish by hash
+ * Retrieve a wish by hash from Redis
  */
 export async function getWish(hash: string): Promise<Wish | null> {
-  const filePath = path.join(WISHES_DIR, `${hash}.json`)
-
   try {
-    const data = await fs.readFile(filePath, 'utf-8')
-    const wish: Wish = JSON.parse(data)
+    const data = await redis.get<string | Wish>(`${WISH_PREFIX}${hash}`)
+    
+    if (!data) return null
 
-    // Check if wish has expired
-    if (wish.expiresAt) {
-      const expirationDate = new Date(wish.expiresAt)
-      if (new Date() > expirationDate) {
-        // Optionally delete expired wish
-        await deleteWish(hash)
-        return null
-      }
-    }
+    // Upstash Redis might return the object directly or as a string depending on configuration
+    const wish: Wish = typeof data === 'string' ? JSON.parse(data) : data
 
     return wish
   } catch (error) {
-    // File not found or parsing error
+    console.error('Failed to get wish from Redis:', error)
     return null
   }
 }
 
 /**
- * Delete a wish by hash
+ * Delete a wish by hash from Redis
  */
 export async function deleteWish(hash: string): Promise<boolean> {
-  const filePath = path.join(WISHES_DIR, `${hash}.json`)
-
   try {
-    await fs.unlink(filePath)
-    return true
+    const deleted = await redis.del(`${WISH_PREFIX}${hash}`)
+    return deleted > 0
   } catch (error) {
     return false
   }
@@ -98,20 +78,17 @@ export async function deleteWish(hash: string): Promise<boolean> {
 
 /**
  * List all active wishes (admin use only)
+ * Note: Scan is used to avoid blocking the single-threaded Redis
  */
 export async function listWishes(): Promise<Wish[]> {
   try {
-    await ensureWishesDir()
-    const files = await fs.readdir(WISHES_DIR)
+    const keys = await redis.keys(`${WISH_PREFIX}*`)
     const wishes: Wish[] = []
 
-    for (const file of files) {
-      if (file.endsWith('.json')) {
-        const hash = file.replace('.json', '')
-        const wish = await getWish(hash)
-        if (wish) {
-          wishes.push(wish)
-        }
+    for (const key of keys) {
+      const wish = await getWish(key.replace(WISH_PREFIX, ''))
+      if (wish) {
+        wishes.push(wish)
       }
     }
 
@@ -119,7 +96,7 @@ export async function listWishes(): Promise<Wish[]> {
       new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
   } catch (error) {
-    console.error('Failed to list wishes:', error)
+    console.error('Failed to list wishes from Redis:', error)
     return []
   }
 }
