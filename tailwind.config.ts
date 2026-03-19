@@ -14,9 +14,9 @@ const config: Config = {
         'background-dark': '#21111d',
         'surface': '#FFFFFF',
         'surface-light': '#FFF7F9',
-        'text-main': '#4A3E4D',
-        'text-muted': '#A89CAE',
-        'muted': '#A89CAE',
+        'text-main': '#3D3140',
+        'text-muted': '#6B5E70',
+        'muted': '#6B5E70',
         'accent': '#FAD59B',
       },
       fontFamily: {

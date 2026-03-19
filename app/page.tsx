@@ -13,7 +13,7 @@ export default function Home() {
       <div className="relative z-10 flex flex-col items-center gap-8 text-center px-6">
 
         {/* Label */}
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#C084A0]">
+        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#8F4A6B]">
           A Special Message For You
         </p>
 

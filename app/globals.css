@@ -111,7 +111,7 @@
 
   .soft-input input,
   .soft-input textarea {
-    @apply w-full bg-transparent border-none focus:ring-0 p-0 text-slate-900 placeholder:text-text-muted/60;
+    @apply w-full bg-transparent border-none focus:ring-0 p-0 text-slate-900 placeholder:text-text-muted/80;
   }
 
   /* Envelope Styles */
