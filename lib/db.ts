@@ -67,6 +67,7 @@ export async function getWish(hash: string): Promise<Wish | null> {
   }
 }
 
+
 /**
  * Delete a wish by hash from Redis
  */

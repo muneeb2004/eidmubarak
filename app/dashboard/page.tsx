@@ -16,6 +16,23 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [copiedHash, setCopiedHash] = useState<string | null>(null)
+  const [deletingHash, setDeletingHash] = useState<string | null>(null)
+
+  const handleDelete = async (hash: string) => {
+    if (!confirm('Are you sure you want to delete this wish? The link will become unusable.')) return
+    
+    setDeletingHash(hash)
+    try {
+      const res = await fetch(`/api/wishes/${hash}`, { method: 'DELETE' })
+      if (!res.ok) throw new Error('Failed to delete')
+      
+      setWishes(wishes => wishes.filter((w) => w.hash !== hash))
+    } catch (err) {
+      alert('Failed to delete wish. Please try again.')
+    } finally {
+      setDeletingHash(null)
+    }
+  }
 
   useEffect(() => {
     fetchWishes()
@@ -116,6 +133,16 @@ export default function DashboardPage() {
                     <Link href={`/wish/${wish.hash}`} target="_blank" className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-text-muted hover:text-primary hover:bg-slate-200 transition-colors" title="View Preview">
                       <span className="material-symbols-outlined text-[18px]">visibility</span>
                     </Link>
+                    <button
+                      onClick={() => handleDelete(wish.hash)}
+                      disabled={deletingHash === wish.hash}
+                      className="w-10 h-10 flex items-center justify-center rounded-full bg-red-50 text-red-500 hover:text-red-700 hover:bg-red-100 transition-colors disabled:opacity-50" 
+                      title="Delete Wish"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">
+                        {deletingHash === wish.hash ? 'hourglass_empty' : 'delete'}
+                      </span>
+                    </button>
                   </div>
                 </li>
               ))}

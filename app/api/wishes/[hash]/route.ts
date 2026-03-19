@@ -68,3 +68,42 @@ export async function GET(
     )
   }
 }
+
+/**
+ * DELETE /api/wishes/[hash]
+ * Deletes a wish by its secure hash
+ * 
+ * Security:
+ * - Requires 'admin_token' cookie
+ * - Validates hash format
+ */
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ hash: string }> }
+) {
+  try {
+    // Admin checking
+    const token = request.cookies.get('admin_token')
+    if (!token || token.value !== 'true') {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { hash } = await params
+
+    if (!isValidHash(hash)) {
+      return NextResponse.json({ error: 'Invalid format' }, { status: 400 })
+    }
+
+    const { deleteWish } = await import('@/lib/db')
+    const success = await deleteWish(hash)
+    
+    if (success) {
+      return NextResponse.json({ success: true }, { status: 200 })
+    } else {
+      return NextResponse.json({ error: 'Deletion failed or not found' }, { status: 404 })
+    }
+  } catch (error) {
+    console.error('API Error during deletion:', error)
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+  }
+}
