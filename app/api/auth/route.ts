@@ -2,13 +2,16 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   try {
-    const { password } = await request.json()
     const correctPassword = process.env.ADMIN_PASSWORD
 
     if (!correctPassword) {
-      console.error('ADMIN_PASSWORD is not set in environment variables')
-      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+      const msg = 'ADMIN_PASSWORD environment variable is missing in Vercel settings.'
+      console.error(`[AUTH_ERROR] ${msg}`)
+      return NextResponse.json({ error: msg }, { status: 500 })
     }
+
+    const body = await request.json().catch(() => ({}))
+    const { password } = body
 
     if (password === correctPassword) {
       const response = NextResponse.json({ success: true }, { status: 200 })
