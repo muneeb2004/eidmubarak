@@ -1,9 +1,0 @@
-{
-  "/_global-error/page": "app/_global-error/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/wishes/[hash]/route": "app/api/wishes/[hash]/route.js",
-  "/api/wishes/route": "app/api/wishes/route.js",
-  "/create/page": "app/create/page.js",
-  "/page": "app/page.js",
-  "/wish/[id]/page": "app/wish/[id]/page.js"
-}
