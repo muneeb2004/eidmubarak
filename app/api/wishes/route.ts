@@ -38,12 +38,6 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
-    // Check for missing Redis configuration at runtime
-    if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
-      console.error('[DATABASE_ERROR] Redis environment variables are not configured.')
-      return NextResponse.json({ error: 'Database configuration missing. Please add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN in Vercel settings.' }, { status: 500 })
-    }
-
     const body = await request.json().catch(() => null)
     if (!body) {
       return NextResponse.json({ error: 'Invalid or missing request body' }, { status: 400 })
