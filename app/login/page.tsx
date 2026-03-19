@@ -57,7 +57,7 @@ function LoginForm() {
             placeholder="Admin Password"
             required
             disabled={loading}
-            className="w-full bg-transparent border-none focus:ring-0 p-0 text-slate-900 placeholder:text-text-muted/80"
+            className="w-full bg-transparent border-none focus:ring-0 p-0 text-text-main placeholder:text-text-muted/80"
           />
         </div>
 

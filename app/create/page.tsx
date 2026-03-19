@@ -88,7 +88,7 @@ export default function CreatePage() {
               auto_awesome
             </span>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2 text-slate-900 dark:text-slate-100">
+          <h1 className="text-3xl font-bold tracking-tight mb-2 text-text-main">
             Create Magic Link
           </h1>
           <p className="text-text-muted">
@@ -102,7 +102,7 @@ export default function CreatePage() {
 
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-slate-700 ml-1" htmlFor="recipientName">To</label>
+            <label className="block text-sm font-medium text-text-main ml-1" htmlFor="recipientName">To</label>
             <div className="soft-input bg-surface-light rounded-2xl flex items-center px-4 h-14">
               <span className="material-symbols-outlined text-text-muted mr-3">person</span>
               <input
@@ -119,7 +119,7 @@ export default function CreatePage() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-slate-700 ml-1" htmlFor="message">Message</label>
+            <label className="block text-sm font-medium text-text-main ml-1" htmlFor="message">Message</label>
             <div className="soft-input bg-surface-light rounded-[20px] p-4 flex items-start h-auto">
               <span className="material-symbols-outlined text-text-muted mr-3 mt-0.5">edit_note</span>
               <textarea
@@ -137,7 +137,7 @@ export default function CreatePage() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-slate-700 ml-1" htmlFor="senderName">From</label>
+            <label className="block text-sm font-medium text-text-main ml-1" htmlFor="senderName">From</label>
             <div className="soft-input bg-surface-light rounded-2xl flex items-center px-4 h-14">
               <span className="material-symbols-outlined text-text-muted mr-3">favorite</span>
               <input
