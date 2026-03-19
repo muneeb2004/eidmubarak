@@ -25,13 +25,13 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
   const flapVariants = {
     closed: {
       rotateX: 0,
-      transition: { duration: 0, ease: 'easeInOut' },
+      transition: { duration: 0, ease: 'easeInOut' as const },
     },
     open: {
       rotateX: -180,
       transition: {
         duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
+        ease: [0.4, 0, 0.2, 1] as const,
       },
     },
   }
@@ -48,7 +48,7 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
       transition: {
         duration: 0.5,
         delay: 0.3,
-        ease: [0.4, 0, 0.2, 1],
+        ease: [0.4, 0, 0.2, 1] as const,
       },
     },
   }
@@ -62,7 +62,7 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
     hover: {
       scale: 1.05,
       rotate: 15,
-      transition: { duration: 0.3, ease: 'easeOut' },
+      transition: { duration: 0.3, ease: 'easeOut' as const },
     },
     tap: {
       scale: 0.95,
@@ -80,7 +80,7 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
         onClick={handleClick}
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: 'easeOut' as const }}
       >
         {/* Envelope Back */}
         <div className="absolute inset-0 bg-[#E8D5E3] rounded-lg shadow-glow overflow-hidden">
