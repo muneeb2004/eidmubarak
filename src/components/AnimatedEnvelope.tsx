@@ -123,7 +123,7 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
         {!isOpen && (
           <motion.button
             aria-label="Open Envelope"
-            className="seal-btn absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-[80px] h-[80px] bg-surface rounded-full shadow-seal flex flex-col items-center justify-center text-primary border-2 border-primary/10"
+            className="seal-btn absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-[80px] h-[80px] bg-surface rounded-full shadow-seal flex flex-col items-center justify-center text-primary border-2 border-primary/10"
             variants={sealVariants}
             initial="idle"
             whileHover="hover"
