@@ -1,5 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createWish, validateWishInput } from '@/lib/db'
+import { createWish, validateWishInput, listWishes } from '@/lib/db'
+
+/**
+ * GET /api/wishes
+ * Lists all generated wishes for the admin dashboard.
+ * Requires admin_token cookie.
+ */
+export async function GET(request: NextRequest) {
+  try {
+    const adminToken = request.cookies.get('admin_token')
+    
+    if (!adminToken || adminToken.value !== 'true') {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const wishes = await listWishes()
+    return NextResponse.json(wishes, {
+      headers: {
+        'Cache-Control': 'no-store', // Never cache admin lists
+      }
+    })
+  } catch (error) {
+    console.error('API Error listing wishes:', error)
+    return NextResponse.json({ error: 'Failed to list wishes' }, { status: 500 })
+  }
+}
 
 /**
  * POST /api/wishes
@@ -10,13 +35,9 @@ import { createWish, validateWishInput } from '@/lib/db'
  * - Generates unpredictable hash (16 hex chars from SHA-256)
  * - Returns only hash and URL (no sensitive data)
  * - Includes security headers
- * - No listing endpoint available
  */
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting should be implemented at reverse proxy/CDN level
-    // For now, basic validation is in place
-
     const body = await request.json()
     const { recipientName, message, senderName } = body
 

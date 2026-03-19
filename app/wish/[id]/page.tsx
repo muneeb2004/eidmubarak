@@ -203,11 +203,7 @@ export default function WishPage() {
           >
             {/* Back Button / Minimal Header */}
             <div className="fixed top-0 left-0 w-full p-6 flex justify-start z-10">
-              <Link href="/">
-                <button className="flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow text-text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/50">
-                  <span className="material-symbols-outlined">arrow_back</span>
-                </button>
-              </Link>
+              {/* Intentional navigation lockdown for recipient: No back button provided. */}
             </div>
 
             <div className="w-full flex justify-center pt-16">

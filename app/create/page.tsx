@@ -68,8 +68,8 @@ export default function CreatePage() {
 
       {/* Header */}
       <header className="w-full flex justify-between items-center p-6 max-w-5xl mx-auto absolute top-0 left-0 right-0 z-10">
-        <Link href="/">
-          <button className="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-sm hover:shadow-md transition-shadow text-text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/50">
+        <Link href="/dashboard">
+          <button className="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-sm hover:shadow-md transition-shadow text-text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/50" title="Back to Dashboard">
             <span className="material-symbols-outlined text-xl">arrow_back</span>
           </button>
         </Link>

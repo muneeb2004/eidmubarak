@@ -1,8 +1,14 @@
 import { Redis } from '@upstash/redis'
 import { generateWishHash } from './hash'
 
-// Initialize Redis client
-const redis = Redis.fromEnv()
+// Initialize Redis client safely (allows Next.js build to pass without env vars)
+const redisUrl = process.env.UPSTASH_REDIS_REST_URL || 'https://dummy-url.upstash.io'
+const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN || 'dummy-token'
+
+const redis = new Redis({
+  url: redisUrl,
+  token: redisToken,
+})
 
 export interface Wish {
   hash: string

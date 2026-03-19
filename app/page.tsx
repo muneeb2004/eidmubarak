@@ -14,7 +14,7 @@ export default function Home() {
 
         {/* Label */}
         <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#8F4A6B]">
-          A Special Message For You
+          Greeting Generator
         </p>
 
         {/* Title */}
@@ -23,7 +23,8 @@ export default function Home() {
         </h1>
 
         {/* Envelope Graphic */}
-        <Link href="/create" className="group relative" aria-label="Open envelope">
+        <Link href="/dashboard" className="group relative" aria-label="Open Dashboard">
+          {/* ... envelope internal layers remain same ... */}
           {/* Glow behind envelope */}
           <div className="absolute inset-0 rounded-2xl blur-2xl scale-110" style={{
             background: 'radial-gradient(ellipse at center, rgba(236,26,148,0.18) 0%, rgba(229,128,178,0.10) 60%, transparent 100%)'
@@ -68,10 +69,10 @@ export default function Home() {
         </Link>
 
         {/* CTA Button */}
-        <Link href="/create">
+        <Link href="/dashboard">
           <button className="flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-display font-semibold text-sm tracking-wide shadow-[0_4px_20px_rgba(236,26,148,0.4)] hover:shadow-[0_6px_28px_rgba(236,26,148,0.55)] hover:-translate-y-0.5 transition-all duration-300"
             style={{ background: 'linear-gradient(135deg,#EC1A94 0%,#D4189E 100%)' }}>
-            Open Letter
+            Admin Login
             <span className="text-base">→</span>
           </button>
         </Link>
