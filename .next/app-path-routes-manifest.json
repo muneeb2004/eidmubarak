@@ -1,0 +1,9 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/wishes/[hash]/route": "/api/wishes/[hash]",
+  "/api/wishes/route": "/api/wishes",
+  "/create/page": "/create",
+  "/page": "/",
+  "/wish/[id]/page": "/wish/[id]"
+}

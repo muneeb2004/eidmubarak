@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modern Joy - Greeting Letter</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e64cbf",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#21111d",
+                        "text-main": "#4A3E4D",
+                        "text-muted": "#A89CAE",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem", 
+                        "lg": "1.5rem", 
+                        "xl": "2rem", 
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "glow": "0 20px 40px -10px rgba(230, 76, 191, 0.25)",
+                    },
+                    animation: {
+                        "slide-up-fade": "slideUpFade 0.4s ease-out forwards",
+                    },
+                    keyframes: {
+                        slideUpFade: {
+                            "0%": { opacity: 0, transform: "translateY(20px)" },
+                            "100%": { opacity: 1, transform: "translateY(0)" },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main antialiased min-h-screen flex items-center justify-center p-4">
+<!-- The Letter Screen is a focused view (reading the card), so we EXCLUDE the shared TopNavBar -->
+<!-- Back Button / Minimal Header (Exception for Focused Views) -->
+<div class="fixed top-0 left-0 w-full p-6 flex justify-start z-10">
+<button aria-label="Go back" class="flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow text-text-muted hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/50">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+</div>
+<!-- Letter Container -->
+<main class="w-full max-w-[600px] bg-white dark:bg-slate-900 rounded-xl shadow-glow p-8 md:p-12 animate-slide-up-fade relative overflow-hidden">
+<!-- Decorative subtle background element inside the card -->
+<div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-32 h-32 bg-primary/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col h-full min-h-[300px] justify-between">
+<!-- Recipient Header -->
+<header class="mb-6">
+<h1 class="text-3xl md:text-4xl font-bold text-primary tracking-tight">
+                    To Sarah,
+                </h1>
+</header>
+<!-- Message Body -->
+<article class="flex-grow mb-10">
+<p class="text-lg text-text-main dark:text-slate-200 leading-[1.6] whitespace-pre-wrap">Wishing you and your loved ones a blessed Eid filled with joy, peace, and prosperity. 
+
+May this special day bring happiness to your heart and home. It's been too long since we last saw each other, and I hope this small message brings a smile to your face today.</p>
+</article>
+<!-- Sender Footer -->
+<footer class="text-right mt-auto">
+<p class="text-xl text-text-muted font-medium italic">
+                    Warmly, <br/>
+<span class="text-text-main dark:text-slate-300 font-semibold not-italic text-lg">Aisha</span>
+</p>
+</footer>
+</div>
+</main>
+</body></html>
