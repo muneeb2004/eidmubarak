@@ -120,10 +120,10 @@ export default function WishPage() {
           >
             {/* Header */}
             <div className="text-content text-center flex flex-col gap-2">
-              <p className="font-body text-muted dark:text-slate-400 font-medium tracking-widest uppercase text-sm mb-2">
+              <p className="font-body text-text-muted font-medium tracking-widest uppercase text-sm mb-2">
                 A Special Message For You
               </p>
-              <h1 className="font-display text-[36px] sm:text-[48px] font-bold leading-tight text-text-main dark:text-slate-50 tracking-tight">
+              <h1 className="font-display text-[36px] sm:text-[48px] font-bold leading-tight text-text-main tracking-tight">
                 Eid Mubarak
               </h1>
             </div>

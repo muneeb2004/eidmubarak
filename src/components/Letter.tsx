@@ -8,7 +8,7 @@ interface LetterProps {
 
 export function Letter({ recipientName, message, senderName = 'Eid Mubarak' }: LetterProps) {
   return (
-    <main className="w-full max-w-[600px] bg-white dark:bg-slate-900 rounded-xl shadow-glow p-8 md:p-12 animate-slide-up-fade relative overflow-hidden">
+    <main className="w-full max-w-[600px] bg-white rounded-xl shadow-glow p-8 md:p-12 animate-slide-up-fade relative overflow-hidden">
       {/* Decorative subtle background elements inside the card */}
       <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-32 h-32 bg-primary/10 rounded-full blur-xl pointer-events-none"></div>
@@ -23,7 +23,7 @@ export function Letter({ recipientName, message, senderName = 'Eid Mubarak' }: L
 
         {/* Message Body */}
         <article className="flex-grow mb-10">
-          <p className="text-lg text-text-main dark:text-slate-200 leading-[1.6] whitespace-pre-wrap">
+          <p className="text-lg text-text-main leading-[1.6] whitespace-pre-wrap">
             {message}
           </p>
         </article>
@@ -32,7 +32,7 @@ export function Letter({ recipientName, message, senderName = 'Eid Mubarak' }: L
         <footer className="text-right mt-auto">
           <p className="text-xl text-text-muted font-medium italic">
             Warmly, <br />
-            <span className="text-text-main dark:text-slate-300 font-semibold not-italic text-lg">
+            <span className="text-text-main font-semibold not-italic text-lg">
               {senderName}
             </span>
           </p>
