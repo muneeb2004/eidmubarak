@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     // For now, basic validation is in place
 
     const body = await request.json()
-    const { recipientName, message } = body
+    const { recipientName, message, senderName } = body
 
     // Validate input
     const validation = validateWishInput(recipientName, message)
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create wish with secure hash
-    const wish = await createWish(recipientName, message)
+    const wish = await createWish(recipientName, message, senderName || 'Eid Mubarak')
 
     // Return minimal info: only hash and generated URL
     return NextResponse.json(

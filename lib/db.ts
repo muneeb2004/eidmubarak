@@ -8,6 +8,7 @@ export interface Wish {
   hash: string
   recipientName: string
   message: string
+  senderName: string
   createdAt: string
   expiresAt?: string
 }
@@ -19,7 +20,8 @@ const WISH_PREFIX = 'wish:'
  */
 export async function createWish(
   recipientName: string,
-  message: string
+  message: string,
+  senderName: string
 ): Promise<Wish> {
   const hash = generateWishHash()
   const now = new Date()
@@ -28,6 +30,7 @@ export async function createWish(
     hash,
     recipientName,
     message,
+    senderName,
     createdAt: now.toISOString(),
     // Optional: set expiration to 30 days from creation
     expiresAt: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString(),
