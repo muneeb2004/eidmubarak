@@ -113,7 +113,7 @@ export function AnimatedEnvelope({ onOpen }: AnimatedEnvelopeProps) {
           style={{ transformStyle: 'preserve-3d', transformOrigin: 'top center' }}
         >
           <div
-            className="absolute top-0 left-0 w-full h-[55%] bg-[#D496C4] rounded-t-lg"
+            className="absolute top-0 left-0 w-full h-[51%] bg-[#D496C4] rounded-t-lg"
             style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
           ></div>
         </motion.div>
