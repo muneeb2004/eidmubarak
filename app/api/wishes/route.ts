@@ -38,6 +38,12 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
+    const adminToken = request.cookies.get('admin_token')
+    
+    if (!adminToken || adminToken.value !== 'true') {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const body = await request.json().catch(() => null)
     if (!body) {
       return NextResponse.json({ error: 'Invalid or missing request body' }, { status: 400 })
